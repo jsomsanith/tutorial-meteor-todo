@@ -8,7 +8,7 @@ if (Meteor.isClient) {
 	});
 
 	Template.body.events({
-		"submit .new-task": function (event) {
+		'submit .new-task': function (event) {
 			// This function is called when the new task form is submitted
 
 			var text = event.target.taskText.value;
@@ -19,10 +19,20 @@ if (Meteor.isClient) {
 			});
 
 			// Clear form
-			event.target.text.value = "";
+			event.target.text.value = '';
 
 			// Prevent default form submit
 			return false;
+		}
+	});
+
+	//in event handler, 'this' refers to the task object
+	Template.task.events({
+		'change .toggle-checked': function(event) {
+			Tasks.update(this._id, {$set: {checked: event.target.checked}});
+		},
+		'click .delete': function() {
+			Tasks.remove(this._id);
 		}
 	});
 }
