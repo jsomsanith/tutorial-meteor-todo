@@ -19,7 +19,7 @@ if (Meteor.isClient) {
 			});
 
 			// Clear form
-			event.target.text.value = '';
+			event.target.taskText.value = '';
 
 			// Prevent default form submit
 			return false;
