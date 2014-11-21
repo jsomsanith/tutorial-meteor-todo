@@ -26,7 +26,9 @@ if (Meteor.isClient) {
 
 			Tasks.insert({
 				text: text,
-				createdAt: new Date() // current time
+				createdAt: new Date(), // current time
+				owner: Meteor.userId(),           // _id of logged in user
+				username: Meteor.user().username  // username of logged in user
 			});
 
 			// Clear form
@@ -36,7 +38,7 @@ if (Meteor.isClient) {
 			return false;
 		},
 		'change .hide-completed input': function(event) {
-			Session.set('hideCompleted', event.target.checked)
+			Session.set('hideCompleted', event.target.checked);
 		}
 	});
 
