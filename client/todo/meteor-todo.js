@@ -1,4 +1,6 @@
 if (Meteor.isClient) {
+	Meteor.subscribe("tasks");
+
 	Template.body.helpers({
 		tasks: function() {
 			if(Session.get("hideCompleted")) {
@@ -34,20 +36,4 @@ if (Meteor.isClient) {
 			Session.set('hideCompleted', event.target.checked);
 		}
 	});
-
-	//in event handler, 'this' refers to the task object
-	Template.task.events({
-		'change .toggle-checked': function(event) {
-			Meteor.call('setChecked', this._id, event.target.checked);
-		},
-		'click .delete': function() {
-			Meteor.call('deleteTask', this._id);
-		}
-	});
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
 }
